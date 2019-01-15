@@ -18,7 +18,7 @@ class Settings extends Component {
         return (
             <NavigatableScreen navigation={this.props.navigation} navigate={this.navigateTo}>
                 <View style={{ flex: 1, width: SCREEN_WIDTH, justifyContent: 'center', alignItems: 'center', }}>
-                    <Text style={{ fontSize: 100 }}>Hello C</Text>
+                    <Text style={{ fontSize: 100 }}>Settings</Text>
                 </View>
             </NavigatableScreen>
         );

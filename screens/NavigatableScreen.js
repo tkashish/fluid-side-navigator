@@ -110,7 +110,7 @@ class NavigatableScreen extends Component {
         return (
             <View style={styles.screenStyle}>
                 <Animated.View style={{ left: listPosition, left: listPosition, paddingTop: SCREEN_HEIGHT * 0.1, paddingLeft: SCREEN_WIDTH * 0.05, width: SCREEN_WIDTH * 0.7 }}>
-                    <Text style={{ fontSize: Math.floor(SCREEN_WIDTH * 0.1), fontWeight: 'bold', marginBottom: 30 }}>Mercedes Benz</Text>
+                    <Text style={{ fontSize: Math.floor(SCREEN_WIDTH * 0.1), fontWeight: 'bold', marginBottom: 30 }}>Company Name</Text>
                     <FlatList
                         showsVerticalScrollIndicator={false}
                         data={navigationList}

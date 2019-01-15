@@ -24,8 +24,7 @@ class Home extends Component {
         return (
             <NavigatableScreen navigation={this.props.navigation} navigate={this.navigateTo}>
                 <View style={{ flex: 1, width: SCREEN_WIDTH, alignItems: 'center' }}>
-                    <Text style={{ fontSize: 100 }}>Hello</Text>
-                    <Text style={{ fontSize: 100 }}>Hello</Text>
+                    <Text style={{ fontSize: 100 }}>Home</Text>
                     <BottomNavigation
                         style={{
                             color: '#0000b3'
