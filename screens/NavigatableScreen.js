@@ -19,16 +19,13 @@ class TouchableWithoutOpacity extends Component {
 
 class NavigatableScreen extends Component {
 
-    state = {
-        showingMenu: true,
-    }
     constructor(props) {
         super(props);
         this.ShowMenuAnim = new Animated.Value(0);
         this.props.navigation.addListener(
             'willFocus',
             payload => {
-                this.hideMenu();
+                this.hide();
             }
         );
     }
@@ -38,29 +35,13 @@ class NavigatableScreen extends Component {
         this.hide();
     }
 
-    showMenu = () => {
-        if (this.state.showingMenu) {
-            return
-        }
-        this.show();
-    }
-
     show = () => {
         Animated.timing(
             this.ShowMenuAnim, {
                 toValue: 1,
                 duration: 500,
                 easing: Easing.elastic(0.5)
-            }).start(() => {
-                this.setState({ showingMenu: true });
-            })
-    }
-
-    hideMenu = () => {
-        if (!this.state.showingMenu) {
-            return
-        }
-        this.hide();
+            }).start()
     }
 
     hide = () => {
@@ -69,9 +50,7 @@ class NavigatableScreen extends Component {
                 toValue: 0,
                 duration: 500,
                 easing: Easing.elastic(0.5)
-            }).start(() => {
-                this.setState({ showingMenu: false })
-            })
+            }).start()
     }
 
     renderNavigationList = (item) => {
@@ -83,7 +62,6 @@ class NavigatableScreen extends Component {
     }
 
     render() {
-        console.log("Rendering " + this.state.showingMenu);
 
         const iconPosition = this.ShowMenuAnim.interpolate({
             inputRange: [0, 1],
@@ -99,7 +77,7 @@ class NavigatableScreen extends Component {
         });
         const borderRadius = this.ShowMenuAnim.interpolate({
             inputRange: [0, 1],
-            outputRange: [0, 40]
+            outputRange: [0, SCREEN_WIDTH / 50]
         });
         const listPosition = this.ShowMenuAnim.interpolate({
             inputRange: [0, 1],
@@ -107,10 +85,11 @@ class NavigatableScreen extends Component {
         });
 
         const AnimatedTouchable = Animated.createAnimatedComponent(TouchableWithoutOpacity);
+
         return (
             <View style={styles.screenStyle}>
-                <Animated.View style={{ left: listPosition, left: listPosition, paddingTop: SCREEN_HEIGHT * 0.1, paddingLeft: SCREEN_WIDTH * 0.05, width: SCREEN_WIDTH * 0.7 }}>
-                    <Text style={{ fontSize: Math.floor(SCREEN_WIDTH * 0.1), fontWeight: 'bold', marginBottom: 30 }}>Company Name</Text>
+                <Animated.View style={{ left: listPosition, paddingTop: SCREEN_HEIGHT * 0.1, paddingLeft: SCREEN_WIDTH * 0.05, width: SCREEN_WIDTH * 0.7 }}>
+                    <Text style={{ fontSize: Math.floor(SCREEN_WIDTH * 0.1), fontWeight: 'bold', marginBottom: 30 }}>Company Name Name</Text>
                     <FlatList
                         showsVerticalScrollIndicator={false}
                         data={navigationList}
@@ -118,13 +97,16 @@ class NavigatableScreen extends Component {
                         keyExtractor={(item) => item}
                     />
                 </Animated.View>
-                <AnimatedTouchable style={[styles.containerStyle, { left: screenLeft, height: screenHeight, borderRadius: borderRadius }]} onPress={this.hideMenu}>
+                <AnimatedTouchable
+                    style={[styles.containerStyle, this.props.style, { left: screenLeft, height: screenHeight, borderRadius: borderRadius }]}
+                    onPress={this.hide}
+                >
                     {this.props.children}
                 </AnimatedTouchable>
                 <Animated.View style={[styles.iconStyle, { left: iconPosition }]}>
                     <Icon
                         name='menu'
-                        onPress={this.showMenu}
+                        onPress={this.show}
                         size={SCREEN_HEIGHT * 0.05}
                     />
                 </Animated.View>
@@ -161,10 +143,7 @@ const styles = {
         opacity: 100,
     },
     containerStyle: {
-        justifyContent: 'center',
-        alignItems: 'center',
         backgroundColor: '#4dd2ff',
-        width: SCREEN_WIDTH,
         shadowColor: 'black',
         shadowColor: ' #000000',
         shadowOffset: { width: -5, height: 5 },

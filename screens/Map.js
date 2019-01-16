@@ -15,8 +15,8 @@ class Map extends Component {
     }
     render() {
         return (
-            <NavigatableScreen navigation={this.props.navigation} navigate={this.navigateTo}>
-                <View style={{ flex: 1, width: SCREEN_WIDTH, justifyContent: 'center', alignItems: 'center', }}>
+            <NavigatableScreen navigation={this.props.navigation} navigate={this.navigateTo} style={{ backgroundColor: '#76b39d' }}>
+                <View style={{ flex: 1, width: SCREEN_WIDTH, justifyContent: 'center', alignItems: 'center' }}>
                     <Text style={{ fontSize: 100 }}>Map</Text>
                 </View>
             </NavigatableScreen>

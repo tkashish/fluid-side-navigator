@@ -16,7 +16,7 @@ class Settings extends Component {
     }
     render() {
         return (
-            <NavigatableScreen navigation={this.props.navigation} navigate={this.navigateTo}>
+            <NavigatableScreen navigation={this.props.navigation} navigate={this.navigateTo} style={{ backgroundColor: '#F78E69' }}>
                 <View style={{ flex: 1, width: SCREEN_WIDTH, justifyContent: 'center', alignItems: 'center', }}>
                     <Text style={{ fontSize: 100 }}>Settings</Text>
                 </View>

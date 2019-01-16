@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, Dimensions } from 'react-native';
+import { View, Text, Dimensions, FlatList } from 'react-native';
 import { Icon } from 'react-native-elements';
 import NavigatableScreen from './NavigatableScreen';
 import BottomNavigation from './BottomNavigation';
-const SCREEN_WIDTH = Dimensions.get('window').width;
+import { MapView } from 'expo';
+
 const { height, width } = Dimensions.get('window');
 
 class Home extends Component {
@@ -23,8 +24,20 @@ class Home extends Component {
     render() {
         return (
             <NavigatableScreen navigation={this.props.navigation} navigate={this.navigateTo}>
-                <View style={{ flex: 1, width: SCREEN_WIDTH, alignItems: 'center' }}>
-                    <Text style={{ fontSize: 100 }}>Home</Text>
+                <View style={{ flex: 1, width, alignItems: 'center' }}>
+                    {/* <FlatList
+                        data={[{ key: 'a' }, { key: 'b' }, { key: 'c' }, { key: 'd' }, { key: 'e' }, { key: 'f' }, { key: 'ggggggggggggg' }]}
+                        renderItem={({ item }) => <Text style={{ fontSize: 100 }}>{item.key}</Text>}
+                    /> */}
+                    <MapView
+                        style={{ flex: 1, width: width }}
+                        initialRegion={{
+                            latitude: 37.78825,
+                            longitude: -122.4324,
+                            latitudeDelta: 0.0922,
+                            longitudeDelta: 0.0421,
+                        }}
+                    />
                     <BottomNavigation
                         style={{
                             color: '#0000b3'
@@ -34,9 +47,6 @@ class Home extends Component {
                             name='rowing'
                             color='#0000b3'
                             size={height * 0.04}
-                            onPress={() => {
-                                console.log(width);
-                            }}
                         />
                         <Icon
                             name='g-translate'
